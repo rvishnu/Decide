@@ -11,20 +11,26 @@
       self.node = node;
 
 
-      self.save = function(){
-        var saved = NodeService.saveNode(self.node, parentNode, function(node)
-        {
-          if(!node){
-            console.log("Unable to save");
-          }
-          else {
-            TreeService.putNodeInArray(node);
-            console.log("Calling the callback");
-          }
-        });
-        $modalInstance.close();
+      self.save = function() {
+        if (self.editNodeForm.$valid) {
 
-      }
+
+          NodeService.saveNode(self.node, parentNode, function (node) {
+            if (!node) {
+              console.log("Unable to save");
+            }
+            else {
+              TreeService.putNodeInArray(node);
+              console.log("Calling the callback");
+            }
+          });
+          $modalInstance.close();
+
+        }
+        else{
+          console.log("Form is invalid");
+        }
+      };
 
       self.cancel = function () {
         $modalInstance.dismiss('cancel');

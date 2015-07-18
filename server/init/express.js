@@ -12,6 +12,8 @@ module.exports = function(db) {
   require('../models/node.model');
 
 
+  app.use(express.static('./dist'));
+
   // Load in Route handlers
   require('../routes/todo.routes')(app);
   require('../routes/tree.routes')(app);

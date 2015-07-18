@@ -1,17 +1,24 @@
 <div class="modal-header">
   <h3 class="modal-title">Edit Node</h3>
 </div>
+<form name="ctrll.editNodeForm" ng-submit="ctrll.save()" novalidate>
 <div class="modal-body">
   <div>
     <span ng-bind="ctrll.node.name"></span>
+
   </div>
   <div>
 
     <div class="form-group">
-      <label for="NameinModal" class="col-sm-2 control-label">Name</label>
+      <label for="name" class="col-sm-2 control-label">Name</label>
 
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="NameinModal" ng-model="ctrll.node.name" >
+        <input type="text" class="form-control" id="name" name="nameOfNode" ng-model="ctrll.node.name" required
+            />
+
+          <span style="color:red" ng-show="ctrll.editNodeForm.nameOfNode.$dirty && ctrll.editNodeForm.nameOfNode.$invalid">
+          <span ng-show="ctrll.editNodeForm.nameOfNode.$error.required">Name is required.</span>
+            </span>
       </div>
     </div>
 
@@ -19,7 +26,11 @@
       <label for="nextQuestion" class="col-sm-2 control-label">Next Question</label>
 
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="nextQuestion" ng-model="ctrll.node.childQuestion">
+        <input type="text" class="form-control" id="nextQuestion" name="childQuestion" ng-model="ctrll.node.childQuestion" ng-maxlength="100">
+        <span style="color:red" ng-show="ctrll.editNodeForm.childQuestion.$dirty &&
+                ctrll.editNodeForm.childQuestion.$invalid">
+          <span ng-show="ctrll.editNodeForm.childQuestion.$error.maxlength">Be concise with the question</span>
+        </span>
       </div>
     </div>
 
@@ -33,7 +44,12 @@
   <label for="toolTip" class="col-sm-2 control-label">Tool Tip Text:</label>
 
   <div class="col-sm-10">
-    <input type="text" class="form-control" rows=2" id="toolTip" ng-model="ctrll.node.toolTip">
+    <input type="text" class="form-control" rows=2" name="toolTip" id="toolTip" ng-model="ctrll.node.toolTip" ng-maxlength="20">
+        <span style="color:red" ng-show="ctrll.editNodeForm.toolTip.$dirty &&
+                ctrll.editNodeForm.toolTip.$invalid">
+          <span ng-show="ctrll.editNodeForm.toolTip.$error.maxlength">
+            Be concise with the Tool Tip</span>
+          </span>
   </div>
 </div>
 
@@ -41,13 +57,14 @@
   <label for="pageURL" class="col-sm-2 control-label">Page / Template URL:</label>
 
   <div class="col-sm-10">
-    <input type="text" class="form-control" id="pageURL" ng-model="ctrll.node.pageURL">
+    <input type="url" class="form-control" id="pageURL" ng-model="ctrll.node.pageURL">
   </div>
 </div>
 
 </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ctrll.save()">save</button>
+  <button class="btn btn-primary" ng-click="submit" ng-disabled="ctrll.editNodeForm.$invalid">save</button>
   <button class="btn btn-warning" ng-click="ctrll.cancel()">Cancel</button>
 </div>
+</form>

@@ -95,6 +95,21 @@
     }
     });
 
+  app.directive('diTree', function(){
+    return{
+      templateUrl:'app/tree/TreeDirective.html',
+      controller: 'DirectiveTreeCtrl as dtCtrl',
+      scope: {
+        node: '=node'
+      },
+      bindToController: true
+    }
+  });
+
+  app.controller('DirectiveTreeCtrl', function(){
+      var self = this;
+  });
+
     app.controller('GetContentCtrl', ['$sce', '$window', function($sce, $window){
       var self = this;
       self.redirect = false;
